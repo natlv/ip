@@ -1,7 +1,12 @@
-import java.util.Objects;
-import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -13,6 +18,8 @@ public class Natsbot {
 
         Scanner reader = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
+
+        String relativePath = "data/natsbot.txt";
 
         while(true) {
             String input = reader.nextLine();
@@ -38,11 +45,11 @@ public class Natsbot {
             Matcher matcherDelete = patternDelete.matcher(input);
 
             if (Objects.equals(input, "bye")) {
-                // Ends the current conversation
+                // End the current conversation
                 System.out.println("Goodbye. Hope to see you again soon!");
                 break;
             } else if (Objects.equals(input, "list")) {
-                // Displays the list of tasks
+                // Display the list of tasks
                 if (tasks.isEmpty()) {
                     System.out.println("You haven't added any tasks to the list yet!");
                     continue;
@@ -52,7 +59,7 @@ public class Natsbot {
                     System.out.println(i + 1 + task.toString());
                 }
             } else if (matcherMark.matches()) {
-                // Marks a specific task as done
+                // Mark a specific task as done
                 int index = Integer.parseInt(input.split(" ")[1]);
                 if (index <= tasks.size() && index > 0) {
                     Task task = tasks.get(index - 1);
@@ -62,19 +69,19 @@ public class Natsbot {
                     System.out.println("Invalid task number.\n");
                 }
             } else if (matcherToDo.matches()) {
-                // Adds a new To Do to the list of tasks
+                // Add a new To Do to the list of tasks
                 Todo additionalTask = new Todo(input.substring(5));
                 tasks.add(additionalTask);
                 System.out.println("Got it. I've added this task:\n" + additionalTask);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (matcherDeadline.matches()) {
-                // Adds a new Deadline to the list of tasks
+                // Add a new Deadline to the list of tasks
                 Deadline additionalTask = new Deadline(input.substring(9, input.indexOf("/by") - 1), input.substring(input.indexOf("/by") + 4));
                 tasks.add(additionalTask);
                 System.out.println("Got it. I've added this task:\n" + additionalTask);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (matcherEventTime.matches()) {
-                // Adds a new Event to the list of tasks
+                // Add a new Event to the list of tasks
                 Event additionalTask = new Event(
                         input.substring(6, input.indexOf("/from") - 1),
                         input.substring(input.indexOf("/from") + 5, input.indexOf("/to") - 1),
@@ -84,7 +91,7 @@ public class Natsbot {
                 System.out.println("Got it. I've added this task:\n" + additionalTask);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (Objects.equals(input, "todo") || Objects.equals(input, "deadline") || Objects.equals(input, "event")) {
-                // Throws an exception if the user tries to make an empty task without a description
+                // Throw an exception if the user tries to make an empty task without a description
                 CommandProcessor processor = new CommandProcessor();
                 try {
                     processor.processInput(input);
@@ -92,7 +99,7 @@ public class Natsbot {
                     System.out.println("Error: " + e.getMessage());
                 }
             } else if (matcherDelete.matches()) {
-                // Deletes selected task from the list
+                // Delete selected task from the list
                 int index = Integer.parseInt(input.split(" ")[1]);
                 if (index <= tasks.size() && index > 0) {
                     Task task = tasks.get(index - 1);
@@ -103,13 +110,35 @@ public class Natsbot {
                     System.out.println("Invalid task number.\n");
                 }
             } else {
-                // Throws an exception if the user gives an invalid command
+                // Throw an exception if the user gives an invalid command
                 CommandProcessor processor = new CommandProcessor();
                 try {
                     processor.processInput(input);
                 } catch (IncompleteTaskException e) {
                     System.out.println("Error: " + e.getMessage());
                 }
+            }
+
+            // Handle the case where the data directory does not exist by creating the data directory
+            try {
+                Files.createDirectories(Paths.get("data"));
+            } catch (IOException e) {
+                System.err.println("Failed to create directories.");
+                e.printStackTrace();
+                return;
+            }
+
+            // Write tasks to natsbot.txt safely
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(relativePath))) {
+                for (Task task : tasks) {
+                    writer.write(task.toString());
+                    writer.newLine();
+                }
+                System.out.println("Task has been successfully written to the file natsbot.txt under the data folder.");
+            } catch (IOException e) {
+                // Handle input or output errors in writing to the file
+                System.err.println("An error occurred while writing to the file.");
+                e.printStackTrace();
             }
         }
 
