@@ -1,0 +1,12 @@
+sleep
+todo sleep more
+deadline homework /by Wednesday
+todo buy book
+todo read book
+event teach tuition /from 4am /to 7am
+deadline learn cs2103 /by tmr
+mark 2
+mark 6
+mark 0
+mark 7
+list
