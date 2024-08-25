@@ -4,9 +4,13 @@ What can I do for you?
 Type a prompt below, type 'list' to see tasks,
 or type 'bye' to exit the program.
 
-Type 'todo', 'deadline ... /by ...', or 'event ... from ... to ...' followed by a task to add it,
+You haven't added any tasks to the list yet!
+Error: Type 'todo', 'deadline ... /by ...', or 'event ... /from ... /to ...' followed by a task to add it,
 'list' to see tasks, or type 'bye' to exit the program.
 
+Error: The 'event' command requires a description and a time range. Usage: event <description> /from <start time> /to <end time>
+Error: The 'todo' command requires a description. Usage: todo <description>
+Error: The 'deadline' command requires a description and a deadline. Usage: deadline <description> /by <deadline>
 Got it. I've added this task:
   [T][ ] sleep more
 Now you have 1 tasks in the list.

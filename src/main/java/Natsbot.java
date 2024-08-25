@@ -39,6 +39,10 @@ public class Natsbot {
                 break;
             } else if (Objects.equals(input, "list")) {
                 // Displays the list of tasks
+                if (tasks.isEmpty()) {
+                    System.out.println("You haven't added any tasks to the list yet!");
+                    continue;
+                }
                 for (int i = 0; i < tasks.size(); i++) {
                     Task task = tasks.get(i);
                     System.out.println(i + 1 + task.toString());
@@ -75,8 +79,20 @@ public class Natsbot {
                 tasks.add(additionalTask);
                 System.out.println("Got it. I've added this task:\n" + additionalTask);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            } else if (Objects.equals(input, "todo") || Objects.equals(input, "deadline") || Objects.equals(input, "event")) {
+                CommandProcessor processor = new CommandProcessor();
+                try {
+                    processor.processInput(input);
+                } catch (IncompleteTaskException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
             } else {
-                System.out.println("Type 'todo', 'deadline ... /by ...', or 'event ... from ... to ...' followed by a task to add it,\n'list' to see tasks, or type 'bye' to exit the program.\n");
+                CommandProcessor processor = new CommandProcessor();
+                try {
+                    processor.processInput(input);
+                } catch (IncompleteTaskException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
             }
         }
 

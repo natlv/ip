@@ -1,4 +1,8 @@
+list
 sleep
+event
+todo
+deadline
 todo sleep more
 deadline homework /by Wednesday
 todo buy book
