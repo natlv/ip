@@ -33,6 +33,10 @@ public class Natsbot {
             Pattern patternEventTime = Pattern.compile(regexEventTime);
             Matcher matcherEventTime = patternEventTime.matcher(input);
 
+            String regexDelete = "^delete \\d+$";
+            Pattern patternDelete = Pattern.compile(regexDelete);
+            Matcher matcherDelete = patternDelete.matcher(input);
+
             if (Objects.equals(input, "bye")) {
                 // Ends the current conversation
                 System.out.println("Goodbye. Hope to see you again soon!");
@@ -58,7 +62,7 @@ public class Natsbot {
                     System.out.println("Invalid task number.\n");
                 }
             } else if (matcherToDo.matches()) {
-                // Adds a new to do to the list of tasks
+                // Adds a new To Do to the list of tasks
                 Todo additionalTask = new Todo(input.substring(5));
                 tasks.add(additionalTask);
                 System.out.println("Got it. I've added this task:\n" + additionalTask);
@@ -70,7 +74,7 @@ public class Natsbot {
                 System.out.println("Got it. I've added this task:\n" + additionalTask);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (matcherEventTime.matches()) {
-                // Adds a new task to the list of tasks
+                // Adds a new Event to the list of tasks
                 Event additionalTask = new Event(
                         input.substring(6, input.indexOf("/from") - 1),
                         input.substring(input.indexOf("/from") + 5, input.indexOf("/to") - 1),
@@ -80,13 +84,26 @@ public class Natsbot {
                 System.out.println("Got it. I've added this task:\n" + additionalTask);
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (Objects.equals(input, "todo") || Objects.equals(input, "deadline") || Objects.equals(input, "event")) {
+                // Throws an exception if the user tries to make an empty task without a description
                 CommandProcessor processor = new CommandProcessor();
                 try {
                     processor.processInput(input);
                 } catch (IncompleteTaskException e) {
                     System.out.println("Error: " + e.getMessage());
                 }
+            } else if (matcherDelete.matches()) {
+                // Deletes selected task from the list
+                int index = Integer.parseInt(input.split(" ")[1]);
+                if (index <= tasks.size() && index > 0) {
+                    Task task = tasks.get(index - 1);
+                    tasks.remove(index - 1);
+                    System.out.println("Noted. I've removed this task:\n" + task);
+                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                } else {
+                    System.out.println("Invalid task number.\n");
+                }
             } else {
+                // Throws an exception if the user gives an invalid command
                 CommandProcessor processor = new CommandProcessor();
                 try {
                     processor.processInput(input);

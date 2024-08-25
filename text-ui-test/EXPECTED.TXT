@@ -33,13 +33,18 @@ Cool! I've marked this task as done:
   [D][X] homework (by: Wednesday)
 Cool! I've marked this task as done:
   [D][X] learn cs2103 (by: tmr)
+Noted. I've removed this task:
+  [T][ ] buy book
+Now you have 5 tasks in the list.
+Invalid task number.
+
 Invalid task number.
 
 Invalid task number.
 
 1  [T][ ] sleep more
 2  [D][X] homework (by: Wednesday)
-3  [T][ ] buy book
-4  [T][ ] read book
-5  [E][ ] teach tuition (from:  4am to:  7am)
-6  [D][X] learn cs2103 (by: tmr)
+3  [T][ ] read book
+4  [E][ ] teach tuition (from:  4am to:  7am)
+5  [D][X] learn cs2103 (by: tmr)
+Goodbye. Hope to see you again soon!
