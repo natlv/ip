@@ -1,2 +1,1 @@
-T | 0 | bang
-T | 0 | sleep
+D | 0 | sleep | Jan 1 2000

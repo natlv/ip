@@ -4,11 +4,14 @@ event
 todo
 deadline
 todo sleep more
-deadline homework /by Wednesday
+deadline homework /by 2024-08-30
 todo buy book
 todo read book
 event teach tuition /from 4am /to 7am
-deadline learn cs2103 /by tmr
+deadline learn cs2103 /by next year
+deadline learn cs2103 /by 2024-30-08
+deadline learn cs2103 /by 2024-09-30 2525
+deadline learn cs2103 /by 2024-09-30 1620
 mark 2
 mark 6
 delete 3
