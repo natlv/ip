@@ -1,1 +1,2 @@
-  [T][ ] sleep
+T | 0 | bang
+T | 0 | sleep
