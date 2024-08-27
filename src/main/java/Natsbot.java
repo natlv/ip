@@ -131,7 +131,13 @@ public class Natsbot {
             // Write tasks to natsbot.txt safely
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(relativePath))) {
                 for (Task task : tasks) {
-                    writer.write(task.toString());
+                    if (task instanceof Todo) {
+                        writer.write("T | " + (task.isDone ? "1" : "0") + " | " + task.description);
+                    } else if (task instanceof Deadline) {
+                        writer.write("D | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " + ((Deadline) task).by);
+                    } else if (task instanceof Event) {
+                        writer.write("E | " + (task.isDone ? "1" : "0") + " | " + task.description + " | " + ((Event) task).from + " | " + ((Event) task).to);
+                    }
                     writer.newLine();
                 }
                 System.out.println("Task has been successfully written to the file natsbot.txt under the data folder.");
