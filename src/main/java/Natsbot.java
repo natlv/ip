@@ -3,6 +3,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -76,10 +80,43 @@ public class Natsbot {
                 System.out.println("Now you have " + tasks.size() + " tasks in the list.");
             } else if (matcherDeadline.matches()) {
                 // Add a new Deadline to the list of tasks
-                Deadline additionalTask = new Deadline(input.substring(9, input.indexOf("/by") - 1), input.substring(input.indexOf("/by") + 4));
-                tasks.add(additionalTask);
-                System.out.println("Got it. I've added this task:\n" + additionalTask);
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                String toBeParsed = input.substring(input.indexOf("/by") + 4);
+
+                if (toBeParsed.length() == 10) {
+                    // Parse the date in the format yyyy-MM-dd, as specified in the minimal requirements
+                    try {
+                        LocalDate date = LocalDate.parse(toBeParsed);
+                        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
+                        Deadline additionalTask = new Deadline(input.substring(9, input.indexOf("/by") - 1), formattedDate);
+                        tasks.add(additionalTask);
+                        System.out.println("Got it. I've added this task:\n" + additionalTask);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid date. Please give a real date in the following format: 'yyyy-MM-dd'");
+                        continue;
+                    }
+                } else if (toBeParsed.length() == 15) {
+                    // Parse the date and time in the format yyyy-mm-dd HHmm
+                    try {
+                        String format = "yyyy-MM-dd HHmm";
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+
+                        LocalDateTime date = LocalDateTime.parse(toBeParsed, formatter);
+                        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+
+                        Deadline additionalTask = new Deadline(input.substring(9, input.indexOf("/by") - 1), formattedDate);
+                        tasks.add(additionalTask);
+                        System.out.println("Got it. I've added this task:\n" + additionalTask);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Invalid date and time. Please give a real date and time in the following format: 'yyyy-MM-dd HHmm'");
+                        continue;
+                    }
+                } else {
+                    // Handle the case where the date or datetime input is not in the correct format
+                    System.out.println("Invalid date. Please either give a real date in the following format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'");
+                }
             } else if (matcherEventTime.matches()) {
                 // Add a new Event to the list of tasks
                 Event additionalTask = new Event(
@@ -140,7 +177,6 @@ public class Natsbot {
                     }
                     writer.newLine();
                 }
-                System.out.println("Task has been successfully written to the file natsbot.txt under the data folder.");
             } catch (IOException e) {
                 // Handle input or output errors in writing to the file
                 System.err.println("An error occurred while writing to the file.");

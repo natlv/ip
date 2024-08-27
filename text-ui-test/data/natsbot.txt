@@ -1,5 +1,5 @@
 T | 0 | sleep more
-D | 1 | homework | Wednesday
+D | 1 | homework | Aug 30 2024
 T | 0 | read book
 E | 0 | teach tuition |  4am |  7am
-D | 1 | learn cs2103 | tmr
+D | 1 | learn cs2103 | Sept 30 2024
