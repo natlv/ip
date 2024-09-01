@@ -12,7 +12,7 @@ public class CommandParserTest {
     }
 
     @Test
-    void testParseTodoWithBlankDescriptionThrowsException() {
+    void testTodoWithBlankDescriptionThrowsException() {
         Exception exception = assertThrows(NatsbotException.class, () -> {
             CommandParser.parse("todo ");
         });
