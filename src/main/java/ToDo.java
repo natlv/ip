@@ -1,14 +1,14 @@
 /**
  * Represents a task with no specific timeframe, known as a To-do.
  */
-public class Todo extends Task {
+public class ToDo extends Task {
 
     /**
      * Constructor for a ToDo task.
      *
      * @param description the task description
      */
-    public Todo(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
