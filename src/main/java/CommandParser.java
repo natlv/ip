@@ -35,6 +35,12 @@ public class CommandParser {
             case "event":
                 return parseEventCommand(words);
 
+            case "find":
+                if (words.length < 2 || words[1].trim().isEmpty()) {
+                    throw new NatsbotException("The search keyword cannot be empty.");
+                }
+                return new FindCommand(words[1].trim());
+
             case "bye":
                 return new ExitCommand();
 
