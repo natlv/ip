@@ -17,29 +17,31 @@ public class CommandParser {
         String commandType = words[0].toLowerCase();
 
         switch (commandType) {
-            case "list":
-                return new ListCommand();
+        case "list":
+            return new ListCommand();
 
-            case "mark":
-                return parseMarkCommand(words);
+        case "mark":
+            return parseMarkCommand(words);
 
-            case "delete":
-                return parseDeleteCommand(words);
+        case "delete":
+            return parseDeleteCommand(words);
 
-            case "todo":
-                return parseTodoCommand(words);
+        case "todo":
+            return parseToDoCommand(words);
 
-            case "deadline":
-                return parseDeadlineCommand(words);
+        case "deadline":
+            return parseDeadlineCommand(words);
 
-            case "event":
-                return parseEventCommand(words);
+        case "event":
+            return parseEventCommand(words);
 
-            case "bye":
-                return new ExitCommand();
+        case "bye":
+            return new ExitCommand();
 
-            default:
-                throw new NatsbotException("I'm sorry, I don't understand that command. Use 'list' to see tasks, 'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event, 'mark' to mark a task as done, or 'delete' to delete a task.");
+        default:
+            throw new NatsbotException("I'm sorry, I don't understand that command. Use 'list' to see tasks,"
+                    + "'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,"
+                    + "'mark' to mark a task as done, or 'delete' to delete a task.");
         }
     }
 
@@ -59,17 +61,18 @@ public class CommandParser {
         return new DeleteCommand(deleteIndex);
     }
 
-    private static Command parseTodoCommand(String[] words) throws NatsbotException {
+    private static Command parseToDoCommand(String[] words) throws NatsbotException {
         if (words.length < 2 || words[1].trim().isEmpty()) {
             throw new NatsbotException("The description of a todo cannot be empty. Usage: todo DESCRIPTION");
         }
-        Task todo = new Todo(words[1].trim());
+        Task todo = new ToDo(words[1].trim());
         return new AddCommand(todo);
     }
 
     private static Command parseDeadlineCommand(String[] words) throws NatsbotException {
         if (words.length < 2 || !words[1].contains("/by")) {
-            throw new NatsbotException("The deadline command must include a description and a date, separated by '/by'. Usage: deadline DESCRIPTION /by DATE (yyyy-MM-dd) or (yyyy-MM-dd HHmm)");
+            throw new NatsbotException("The deadline command must include a description and a date,"
+                    + "separated by '/by'. Usage: deadline DESCRIPTION /by DATE (yyyy-MM-dd) or (yyyy-MM-dd HHmm)");
         }
         String[] parts = words[1].split(" /by ", 2);
         String description = parts[0].trim();
@@ -80,11 +83,13 @@ public class CommandParser {
 
     private static Command parseEventCommand(String[] words) throws NatsbotException {
         if (words.length < 2 || !words[1].contains("/from") || !words[1].contains("/to")) {
-            throw new NatsbotException("The 'event' command must include a description and a time range. Usage: event DESCRIPTION /from START /to END");
+            throw new NatsbotException("The 'event' command must include a description and a time range."
+                    + "Usage: event DESCRIPTION /from START /to END");
         }
         String[] parts = words[1].split(" /from | /to ");
         if (parts.length < 3) {
-            throw new NatsbotException("The event must have a valid description, start time, and end time. Usage: event DESCRIPTION /from START /to END");
+            throw new NatsbotException("The event must have a valid description, start time, and end time."
+                    + "Usage: event DESCRIPTION /from START /to END");
         }
         String description = parts[0].trim();
         String from = parts[1].trim();
@@ -116,7 +121,8 @@ public class CommandParser {
                 String formattedDateTime = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
                 return new Deadline(description, formattedDateTime);
             } catch (DateTimeParseException e2) {
-                throw new NatsbotException("Invalid date format. Please either input a real date in the following format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.");
+                throw new NatsbotException("Invalid date format. Please either input a real date in the following"
+                        + "format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.");
             }
         }
     }
