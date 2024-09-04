@@ -75,4 +75,20 @@ public class Ui {
             }
         }
     }
+
+    /**
+     * Displays the tasks that match the search keyword to the user.
+     *
+     * @param foundTasks the list of tasks that match the search keyword
+     */
+    public void showFoundTasks(List<Task> foundTasks) {
+        if (foundTasks.isEmpty()) {
+            System.out.println("No tasks found matching the keyword.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                System.out.println((i + 1) + ". " + foundTasks.get(i));
+            }
+        }
+    }
 }
