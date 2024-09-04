@@ -1,34 +1,71 @@
 import java.util.List;
 
+/**
+ * Handles all user interactions for the Natsbot application.
+ */
 public class Ui {
+
+    /**
+     * Displays a welcome message to the user.
+     */
     public void showWelcomeMessage() {
         // Print welcome message
         System.out.println("Hello! I'm Natsbot\n" + "What can I do for you?\n");
         System.out.println("Type a prompt below, type 'list' to see tasks,\nor type 'bye' to exit the program.\n");
     }
 
+    /**
+     * Displays a farewell message to the user.
+     */
     public void showGoodbyeMessage() {
         System.out.println("Goodbye. Hope to see you again soon!");
     }
 
+    /**
+     * Displays an error message to the user.
+     *
+     * @param message the error message to be displayed
+     */
     public void showError(String message) {
         System.out.println("Error: " + message);
     }
 
+    /**
+     * Displays a message when a task is added.
+     *
+     * @param task the task that was added
+     * @param size the current number of tasks in the list
+     */
     public void showTaskAdded(Task task, int size) {
         System.out.println("Got it. I've added this task:\n" + task);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Displays a message when a task is deleted.
+     *
+     * @param task the task that was deleted
+     * @param size the current number of tasks in the list
+     */
     public void showTaskDeleted(Task task, int size) {
         System.out.println("Noted. I've removed this task:\n" + task);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Displays a message when a task is marked as done.
+     *
+     * @param task the task that was marked as done
+     */
     public void showTaskMarked(Task task) {
         System.out.println("Cool! I've marked this task as done:\n" + task);
     }
 
+    /**
+     * Displays a list of added tasks to the user.
+     *
+     * @param tasks the list of existing tasks
+     */
     public void showTaskList(List<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println("You haven't added any tasks to the list yet!");

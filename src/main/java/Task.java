@@ -1,3 +1,7 @@
+/**
+ * Represents a task with a description and a completion status.
+ * This is an abstract base class for different types of tasks such as Todo, Deadline, and Event.
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
