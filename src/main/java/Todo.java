@@ -1,3 +1,6 @@
+/**
+ * Represents a task with no specific timeframe, known as a To-do.
+ */
 public class Todo extends Task {
 
     /**

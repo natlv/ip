@@ -1,3 +1,6 @@
+/**
+ * Represents a task that starts and ends at a specific time, known as an Event.
+ */
 public class Event extends Task {
     protected String from;
     protected String to;
