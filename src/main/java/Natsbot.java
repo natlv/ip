@@ -8,6 +8,7 @@ public class Natsbot {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+    private String commandType;
 
     /**
      * Constructs a new Natsbot instance with the specified file path for storage.
@@ -29,19 +30,42 @@ public class Natsbot {
 
         while (true) {
             String input = reader.nextLine();
-            try {
-                Command command = CommandParser.parse(input);
-                if (command instanceof ExitCommand) {
-                    break;
-                }
-                command.execute(tasks, ui, storage);
-            } catch (NatsbotException e) {
-                ui.showError(e.getMessage());
+            String response = getResponse(input); // Use getResponse to handle input and generate response
+            System.out.println(response);
+
+            if ("ExitCommand".equals(commandType)) { // Break the loop if the command type is ExitCommand
+                break;
             }
         }
 
         reader.close();
         ui.showGoodbyeMessage();
+    }
+
+    /**
+     * Processes the input, executes the corresponding command, and returns the response.
+     *
+     * @param input the user's input string
+     * @return the response message from the executed command
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = CommandParser.parse(input);
+            command.execute(tasks, ui, storage);
+            commandType = command.getClass().getSimpleName(); // Track the type of the executed command
+            return command instanceof ResponseCommand ? ((ResponseCommand) command).getString() : ""; // Get the response string if available
+        } catch (NatsbotException e) {
+            return "Error: " + e.getMessage();
+        }
+    }
+
+    /**
+     * Returns the type of the last executed command.
+     *
+     * @return the command type as a string
+     */
+    public String getCommandType() {
+        return commandType;
     }
 
     /**

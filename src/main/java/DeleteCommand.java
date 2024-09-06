@@ -1,8 +1,9 @@
 /**
  * Represents a command to delete a task from the task list.
  */
-public class DeleteCommand implements Command{
+public class DeleteCommand implements Command, ResponseCommand {
     private int taskIndex;
+    private String response;
 
     /**
      * Constructs a DeleteCommand with the specified index of the task to be deleted.
@@ -29,7 +30,18 @@ public class DeleteCommand implements Command{
         }
         Task task = tasks.getTasks().get(taskIndex);
         tasks.deleteTask(taskIndex);
+        response = "Deleted task:\n" + task;
         ui.showTaskDeleted(task, tasks.getTasks().size());
         storage.save(tasks.getTasks());
+    }
+
+    /**
+     * Returns the response message generated after deleting the task.
+     *
+     * @return the response message as a string
+     */
+    @Override
+    public String getString() {
+        return response;
     }
 }

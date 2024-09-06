@@ -1,7 +1,7 @@
 /**
  * Represents a command to add a task to the list of tasks.
  */
-public class AddCommand implements Command {
+public class AddCommand implements Command, ResponseCommand {
     private Task task;
 
     /**
@@ -27,5 +27,10 @@ public class AddCommand implements Command {
         tasks.addTask(task);
         ui.showTaskAdded(task, tasks.getTasks().size());
         storage.save(tasks.getTasks());
+    }
+
+    @Override
+    public String getString() {
+        return "Task added: " + task.toString();
     }
 }
