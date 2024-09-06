@@ -1,8 +1,9 @@
 /**
  * Represents a command to mark a task as done in the task list.
  */
-public class MarkCommand implements Command {
+public class MarkCommand implements Command, ResponseCommand {
     private int taskIndex;
+    private String response;
 
     /**
      * Constructs a MarkCommand with the specified index of the task to be marked as done.
@@ -29,7 +30,18 @@ public class MarkCommand implements Command {
         }
         Task task = tasks.getTasks().get(taskIndex);
         task.setDone(true);
+        response = "Nice! I've marked this task as done:\n" + task;
         ui.showTaskMarked(task);
         storage.save(tasks.getTasks());
+    }
+
+    /**
+     * Returns the response message generated after marking the task.
+     *
+     * @return the response message as a string
+     */
+    @Override
+    public String getString() {
+        return response;
     }
 }

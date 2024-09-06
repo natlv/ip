@@ -20,35 +20,35 @@ public class CommandParser {
         String commandType = words[0].toLowerCase();
 
         switch (commandType) {
-            case "list":
-                return new ListCommand();
+        case "list":
+            return new ListCommand();
 
-            case "mark":
-                return parseMarkCommand(words);
+        case "mark":
+            return parseMarkCommand(words);
 
-            case "delete":
-                return parseDeleteCommand(words);
+        case "delete":
+            return parseDeleteCommand(words);
 
-            case "todo":
-                return parseToDoCommand(words);
+        case "todo":
+            return parseToDoCommand(words);
 
-            case "deadline":
-                return parseDeadlineCommand(words);
+        case "deadline":
+            return parseDeadlineCommand(words);
 
-            case "event":
-                return parseEventCommand(words);
+        case "event":
+            return parseEventCommand(words);
 
-            case "find":
-                if (words.length < 2 || words[1].trim().isEmpty()) {
-                    throw new NatsbotException("The search keyword cannot be empty.");
-                }
-                return new FindCommand(words[1].trim());
+        case "find":
+            if (words.length < 2 || words[1].trim().isEmpty()) {
+                throw new NatsbotException("The search keyword cannot be empty.");
+            }
+            return new FindCommand(words[1].trim());
 
-            case "bye":
-                return new ExitCommand();
+        case "bye":
+            return new ExitCommand();
 
         default:
-            throw new NatsbotException("I'm sorry, I don't understand that command. Use 'list' to see tasks,"
+            return new UnknownCommand("I'm sorry, I don't understand that command. Use 'list' to see tasks,"
                     + "'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,"
                     + "'mark' to mark a task as done, or 'delete' to delete a task.");
         }
