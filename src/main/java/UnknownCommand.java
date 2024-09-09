@@ -22,7 +22,7 @@ public class UnknownCommand implements Command, ResponseCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showError(response); // Optional: Display response through UI
+        ui.showError(response);
     }
 
     /**
