@@ -54,6 +54,13 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Parses the 'mark' command to create a MarkCommand with the specified index.
+     *
+     * @param words the split input string containing the command and index
+     * @return a MarkCommand object to mark a task as completed
+     * @throws NatsbotException if the task index is not specified or invalid
+     */
     private static Command parseMarkCommand(String[] words) throws NatsbotException {
         if (words.length < 2) {
             throw new NatsbotException("Please specify a task number to mark as done. usage: mark INDEX");
@@ -62,6 +69,13 @@ public class CommandParser {
         return new MarkCommand(markIndex);
     }
 
+    /**
+     * Parses the 'delete' command to create a DeleteCommand with the specified index.
+     *
+     * @param words the split input string containing the command and index
+     * @return a DeleteCommand object to delete a task
+     * @throws NatsbotException if the task index is not specified or invalid
+     */
     private static Command parseDeleteCommand(String[] words) throws NatsbotException {
         if (words.length < 2) {
             throw new NatsbotException("Please specify a task number to delete. usage: delete INDEX");
@@ -70,6 +84,13 @@ public class CommandParser {
         return new DeleteCommand(deleteIndex);
     }
 
+    /**
+     * Parses the 'todo' command to create an AddCommand that adds a new ToDo task.
+     *
+     * @param words the split input string containing the command and task description
+     * @return an AddCommand object to add a new ToDo task
+     * @throws NatsbotException if the task description is missing or empty
+     */
     private static Command parseToDoCommand(String[] words) throws NatsbotException {
         if (words.length < 2 || words[1].trim().isEmpty()) {
             throw new NatsbotException("The description of a todo cannot be empty. Usage: todo DESCRIPTION");
@@ -78,6 +99,13 @@ public class CommandParser {
         return new AddCommand(todo);
     }
 
+    /**
+     * Parses the 'deadline' command to create an AddCommand that adds a new Deadline task.
+     *
+     * @param words the split input string containing the command, task description, and date
+     * @return an AddCommand object to add a new Deadline task
+     * @throws NatsbotException if the command format is incorrect or the description is empty
+     */
     private static Command parseDeadlineCommand(String[] words) throws NatsbotException {
         if (words.length < 2 || !words[1].contains("/by")) {
             throw new NatsbotException("The deadline command must include a description and a date,"
@@ -92,6 +120,13 @@ public class CommandParser {
         return new AddCommand(deadline);
     }
 
+    /**
+     * Parses the 'event' command to create an AddCommand that adds a new Event task.
+     *
+     * @param words the split input string containing the command, task description, and time range
+     * @return an AddCommand object to add a new Event task
+     * @throws NatsbotException if the command format is incorrect, missing start or end time, or description
+     */
     private static Command parseEventCommand(String[] words) throws NatsbotException {
         if (words.length < 2 || !words[1].contains("/from") || !words[1].contains("/to")) {
             throw new NatsbotException("The 'event' command must include a description and a time range."
@@ -109,6 +144,13 @@ public class CommandParser {
         return new AddCommand(event);
     }
 
+    /**
+     * Parses the provided input string to convert it to a zero-based index.
+     *
+     * @param input the user's input string representing the index
+     * @return the zero-based index parsed from the input
+     * @throws NatsbotException if the input is not a valid number or the index is out of bounds
+     */
     private static int parseIndex(String input) throws NatsbotException {
         try {
             int index = Integer.parseInt(input) - 1; // Convert to zero-based index
@@ -121,6 +163,14 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Parses the deadline date string and converts it to a Deadline object.
+     *
+     * @param description the description of the task
+     * @param by          the date string representing the deadline
+     * @return a Deadline object with the parsed description and date
+     * @throws NatsbotException if the date format is incorrect
+     */
     private static Deadline parseDeadline(String description, String by) throws NatsbotException {
         try {
             LocalDate date = LocalDate.parse(by);
