@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Main class that runs the Natsbot application.
+ * Class that runs the Natsbot text application.
  */
 public class Natsbot {
 
