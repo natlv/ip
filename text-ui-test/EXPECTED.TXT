@@ -5,38 +5,52 @@ Type a prompt below, type 'list' to see tasks,
 or type 'bye' to exit the program.
 
 You haven't added any tasks to the list yet!
-Error: I'm sorry, I don't understand that command. Use 'list' to see tasks, 'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event, 'mark' to mark a task as done, or 'delete' to delete a task.
-Error: The 'event' command must include a description and a time range. Usage: event DESCRIPTION /from START /to END
+Hmm... your task list is empty. There's nothing to see here.
+Error: I'm sorry, I don't understand that command. Use 'list' to see tasks,'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,'mark' to mark a task as done, or 'delete' to delete a task.
+I'm sorry, I don't understand that command. Use 'list' to see tasks,'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,'mark' to mark a task as done, or 'delete' to delete a task.
+Error: The 'event' command must include a description and a time range.Usage: event DESCRIPTION /from START /to END
 Error: The description of a todo cannot be empty. Usage: todo DESCRIPTION
-Error: The deadline command must include a description and a date, separated by '/by'. Usage: deadline DESCRIPTION /by DATE (yyyy-MM-dd) or (yyyy-MM-dd HHmm)
+Error: The deadline command must include a description and a date,separated by '/by'. Usage: deadline DESCRIPTION /by DATE (yyyy-MM-dd) or (yyyy-MM-dd HHmm)
 Got it. I've added this task:
   [T][ ] sleep more
 Now you have 1 tasks in the list.
+Task added:   [T][ ] sleep more
 Got it. I've added this task:
   [D][ ] homework (by: Aug 30 2024)
 Now you have 2 tasks in the list.
+Task added:   [D][ ] homework (by: Aug 30 2024)
 Got it. I've added this task:
   [T][ ] buy book
 Now you have 3 tasks in the list.
+Task added:   [T][ ] buy book
 Got it. I've added this task:
   [T][ ] read book
 Now you have 4 tasks in the list.
+Task added:   [T][ ] read book
 Got it. I've added this task:
   [E][ ] teach tuition (from: 4am to: 7am)
 Now you have 5 tasks in the list.
+Task added:   [E][ ] teach tuition (from: 4am to: 7am)
 Error: Invalid date format. Please either input a real date in the following format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.
 Error: Invalid date format. Please either input a real date in the following format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.
 Error: Invalid date format. Please either input a real date in the following format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.
 Got it. I've added this task:
   [D][ ] learn cs2103 (by: Sept 30 2024 16:20)
 Now you have 6 tasks in the list.
+Task added:   [D][ ] learn cs2103 (by: Sept 30 2024 16:20)
 Cool! I've marked this task as done:
   [D][X] homework (by: Aug 30 2024)
+Nice! I've marked this task as done:
+  [D][X] homework (by: Aug 30 2024)
 Cool! I've marked this task as done:
+  [D][X] learn cs2103 (by: Sept 30 2024 16:20)
+Nice! I've marked this task as done:
   [D][X] learn cs2103 (by: Sept 30 2024 16:20)
 Noted. I've removed this task:
   [T][ ] buy book
 Now you have 5 tasks in the list.
+Deleted task:
+  [T][ ] buy book
 Error: Invalid task number.
 Error: Invalid task number.
 Error: Invalid task number.
@@ -45,4 +59,12 @@ Error: Invalid task number.
 3.   [T][ ] read book
 4.   [E][ ] teach tuition (from: 4am to: 7am)
 5.   [D][X] learn cs2103 (by: Sept 30 2024 16:20)
+Here are the tasks in your list:
+1.   [T][ ] sleep more
+2.   [D][X] homework (by: Aug 30 2024)
+3.   [T][ ] read book
+4.   [E][ ] teach tuition (from: 4am to: 7am)
+5.   [D][X] learn cs2103 (by: Sept 30 2024 16:20)
+Goodbye. Hope to see you again soon!
+Goodbye. Hope to see you again soon!
 Goodbye. Hope to see you again soon!

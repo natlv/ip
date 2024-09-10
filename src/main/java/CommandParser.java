@@ -132,7 +132,7 @@ public class CommandParser {
                 String formattedDateTime = dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
                 return new Deadline(description, formattedDateTime);
             } catch (DateTimeParseException e2) {
-                throw new NatsbotException("Invalid date format. Please either input a real date in the following"
+                throw new NatsbotException("Invalid date format. Please either input a real date in the following "
                         + "format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.");
             }
         }
