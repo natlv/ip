@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /** Injects the Duke instance */
-    public void setDuke(Natsbot nb) {
+    public void setNatsbot(Natsbot nb) {
         natsbot = nb;
     }
 

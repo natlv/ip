@@ -1,7 +1,7 @@
 /**
  * Parses tasks in the storage file.
  */
-public class TaskParser {
+public class TaskInStorageParser {
     /**
      * Parses a line of text from the storage file and returns the corresponding Task object.
      *
