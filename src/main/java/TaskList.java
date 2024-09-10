@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Manages the list of tasks for the Natsbot application.
@@ -14,15 +15,6 @@ public class TaskList {
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
-    }
-
-    /**
-     * Constructs a TaskList with the specified list of tasks.
-     *
-     * @param tasks the list of tasks to initialize the TaskList with
-     */
-    public TaskList(List<Task> tasks) {
-        this.tasks = tasks;
     }
 
     /**
@@ -67,13 +59,9 @@ public class TaskList {
      * @return a list of tasks that match the keyword
      */
     public List<Task> findTasksByKeyword(String keyword) {
-        List<Task> matchingTasks = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.description.contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
-        return matchingTasks;
+        return tasks.stream()
+                .filter(task -> task.description.contains(keyword))
+                .collect(Collectors.toList());
     }
 
     /**
