@@ -35,7 +35,7 @@ public class Storage {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                tasks.add(TaskParser.parse(line));
+                tasks.add(TaskInStorageParser.parse(line));
             }
         } catch (IOException e) {
             throw new NatsbotException("Unable to read file.");
