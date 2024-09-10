@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Represents a command to list all existing tasks that are in the task list.
@@ -17,18 +19,16 @@ public class ListCommand implements Command, ResponseCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> taskList = tasks.getTasks();
-        StringBuilder responseBuilder = new StringBuilder();
 
         if (taskList.isEmpty()) {
-            responseBuilder.append("Hmm... your task list is empty. There's nothing to see here.");
+            response = "Hmm... your task list is empty. There's nothing to see here.";
         } else {
             assert taskList.size() > 0 : "Task list should not be empty.";
-            responseBuilder.append("Here are the tasks in your list:\n");
-            for (int i = 0; i < taskList.size(); i++) {
-                responseBuilder.append((i + 1)).append(". ").append(taskList.get(i)).append("\n");
-            }
+            response = "Here are the tasks in your list:\n" +
+                       IntStream.range(0, taskList.size())
+                                .mapToObj(i -> (i + 1) + ". " + taskList.get(i))
+                                .collect(Collectors.joining("\n"));
         }
-        response = responseBuilder.toString();
         ui.showTaskList(tasks.getTasks());
     }
 
