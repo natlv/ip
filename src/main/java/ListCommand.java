@@ -22,6 +22,7 @@ public class ListCommand implements Command, ResponseCommand {
         if (taskList.isEmpty()) {
             responseBuilder.append("Hmm... your task list is empty. There's nothing to see here.");
         } else {
+            assert taskList.size() > 0 : "Task list should not be empty.";
             responseBuilder.append("Here are the tasks in your list:\n");
             for (int i = 0; i < taskList.size(); i++) {
                 responseBuilder.append((i + 1)).append(". ").append(taskList.get(i)).append("\n");

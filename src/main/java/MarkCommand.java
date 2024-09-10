@@ -28,8 +28,11 @@ public class MarkCommand implements Command, ResponseCommand {
         if (taskIndex < 0 || taskIndex >= tasks.getTasks().size()) {
             throw new NatsbotException("Invalid task number.");
         }
+        assert tasks != null : "TaskList should not be null";
+        assert taskIndex >= 0 && taskIndex < tasks.getTasks().size() : "Task index should be valid";
         Task task = tasks.getTasks().get(taskIndex);
         task.setDone(true);
+        assert task.getStatusIcon().equals("X") : "Task should be marked as done";
         response = "Nice! I've marked this task as done:\n" + task;
         ui.showTaskMarked(task);
         storage.save(tasks.getTasks());

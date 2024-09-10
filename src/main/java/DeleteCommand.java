@@ -29,7 +29,10 @@ public class DeleteCommand implements Command, ResponseCommand {
             throw new NatsbotException("Invalid task number.");
         }
         Task task = tasks.getTasks().get(taskIndex);
+        assert task != null : "Task should not be null";
+        int origTaskListSize = tasks.getTasks().size();
         tasks.deleteTask(taskIndex);
+        assert tasks.getTasks().size() == origTaskListSize - 1 : "Task should have been deleted";
         response = "Deleted task:\n" + task;
         ui.showTaskDeleted(task, tasks.getTasks().size());
         storage.save(tasks.getTasks());
