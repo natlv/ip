@@ -83,6 +83,8 @@ public class CommandParser {
             throw new NatsbotException("The deadline command must include a description and a date,"
                     + "separated by '/by'. Usage: deadline DESCRIPTION /by DATE (yyyy-MM-dd) or (yyyy-MM-dd HHmm)");
         }
+        assert words != null && words.length > 0 : "Input words should not be null or empty";
+        assert words[1].contains("/by") : "Deadline command must contain '/by' separator";
         String[] parts = words[1].split(" /by ", 2);
         String description = parts[0].trim();
         String by = parts[1].trim();

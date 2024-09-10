@@ -19,7 +19,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(417);
-            fxmlLoader.<MainWindow>getController().setDuke(natsbot);  // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setDuke(natsbot);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

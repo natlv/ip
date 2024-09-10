@@ -23,6 +23,7 @@ public class ListCommand implements Command, ResponseCommand {
         if (taskList.isEmpty()) {
             response = "Hmm... your task list is empty. There's nothing to see here.";
         } else {
+            assert taskList.size() > 0 : "Task list should not be empty.";
             response = "Here are the tasks in your list:\n" +
                        IntStream.range(0, taskList.size())
                                 .mapToObj(i -> (i + 1) + ". " + taskList.get(i))
