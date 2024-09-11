@@ -1,3 +1,6 @@
+/**
+ * Represents a task that should be done after a specified event or time.
+ */
 public class DoAfter extends Task {
     private final String after;
 
@@ -19,7 +22,7 @@ public class DoAfter extends Task {
      */
     @Override
     public String toString() {
-        return "[A]" + super.toString() + " (after: " + after + ")";
+        return "  [A]" + super.toString() + " (after: " + after + ")";
     }
 
     /**

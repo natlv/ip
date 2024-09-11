@@ -1,17 +1,19 @@
+import java.util.List;
+
 /**
  * Represents a command to mark a task as done in the task list.
  */
 public class MarkCommand implements Command, ResponseCommand {
-    private int taskIndex;
+    private final List<Integer> taskIndices;
     private String response;
 
     /**
      * Constructs a MarkCommand with the specified index of the task to be marked as done.
      *
-     * @param taskIndex the index of the task to mark as done
+     * @param taskIndices the indices of the tasks to be marked as done
      */
-    public MarkCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+    public MarkCommand(List<Integer> taskIndices) {
+        this.taskIndices = taskIndices;
     }
 
     /**
@@ -25,16 +27,19 @@ public class MarkCommand implements Command, ResponseCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws NatsbotException {
-        if (taskIndex < 0 || taskIndex >= tasks.getTasks().size()) {
-            throw new NatsbotException("Invalid task number.");
+        StringBuilder responseBuilder = new StringBuilder("Cool! I've marked the following as done:\n");
+        for (int index : taskIndices) {
+            if (index < 0 || index >= tasks.getTasks().size()) {
+                throw new NatsbotException("Invalid task number.");
+            }
+            assert tasks != null : "TaskList should not be null";
+            Task task = tasks.getTasks().get(index);
+            task.setDone(true);
+            assert task.getStatusIcon().equals("X") : "Task should be marked as done";
+            responseBuilder.append(task).append("\n");
         }
-        assert tasks != null : "TaskList should not be null";
-        assert taskIndex >= 0 && taskIndex < tasks.getTasks().size() : "Task index should be valid";
-        Task task = tasks.getTasks().get(taskIndex);
-        task.setDone(true);
-        assert task.getStatusIcon().equals("X") : "Task should be marked as done";
-        response = "Nice! I've marked this task as done:\n" + task;
-        ui.showTaskMarked(task);
+        response = responseBuilder.toString();
+        ui.showTaskMarked(response);
         storage.save(tasks.getTasks());
     }
 

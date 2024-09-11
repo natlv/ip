@@ -12,10 +12,13 @@ deadline learn cs2103 /by next year
 deadline learn cs2103 /by 2024-30-08
 deadline learn cs2103 /by 2024-09-30 2525
 deadline learn cs2103 /by 2024-09-30 1620
+do-after return book /after exam
+do-after take a nap /after studying
 mark 2
 mark 6
-delete 3
+delete 1 3 4
 mark 0
+mark 1 2
 mark 7
 delete 7
 list

@@ -2,6 +2,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Parses input from the user into executable commands.
@@ -53,7 +55,7 @@ public class CommandParser {
         default:
             return new UnknownCommand("I'm sorry, I don't understand that command. Use 'list' to see tasks,"
                     + "'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,"
-                    + "'do-after' to add a do-after task, 'mark' to mark a task done, or 'delete' to delete a task.");
+                    + "'do-after' to add a do-after task, 'mark' to mark tasks as done, or 'delete' to delete tasks.");
         }
     }
 
@@ -61,30 +63,32 @@ public class CommandParser {
      * Parses the 'mark' command to create a MarkCommand with the specified index.
      *
      * @param words the split input string containing the command and index
-     * @return a MarkCommand object to mark a task as completed
+     * @return a MarkCommand object to mark tasks as completed
      * @throws NatsbotException if the task index is not specified or invalid
      */
     private static Command parseMarkCommand(String[] words) throws NatsbotException {
         if (words.length < 2) {
-            throw new NatsbotException("Please specify a task number to mark as done. usage: mark INDEX");
+            throw new NatsbotException("Please specify a task number or space-separated numbers to mark as done. "
+                    + "usage: mark INDEX");
         }
-        int markIndex = parseIndex(words[1]);
-        return new MarkCommand(markIndex);
+        List<Integer> indices = parseIndices(words[1]);
+        return new MarkCommand(indices);
     }
 
     /**
      * Parses the 'delete' command to create a DeleteCommand with the specified index.
      *
      * @param words the split input string containing the command and index
-     * @return a DeleteCommand object to delete a task
+     * @return a DeleteCommand object to delete tasks
      * @throws NatsbotException if the task index is not specified or invalid
      */
     private static Command parseDeleteCommand(String[] words) throws NatsbotException {
         if (words.length < 2) {
-            throw new NatsbotException("Please specify a task number to delete. usage: delete INDEX");
+            throw new NatsbotException("Please specify task number or space-separated numbers to delete. "
+                    + "usage: delete INDEX");
         }
-        int deleteIndex = parseIndex(words[1]);
-        return new DeleteCommand(deleteIndex);
+        List<Integer> indices = parseIndices(words[1]);
+        return new DeleteCommand(indices);
     }
 
     /**
@@ -148,22 +152,27 @@ public class CommandParser {
     }
 
     /**
-     * Parses the provided input string to convert it to a zero-based index.
+     * Parses the provided input string to convert it into a list of zero-based indices.
      *
-     * @param input the user's input string representing the index
-     * @return the zero-based index parsed from the input
-     * @throws NatsbotException if the input is not a valid number or the index is out of bounds
+     * @param input the user's input string representing the indices
+     * @return a list of zero-based indices parsed from the input
+     * @throws NatsbotException if any input is not a valid number or if indices are out of bounds
      */
-    private static int parseIndex(String input) throws NatsbotException {
-        try {
-            int index = Integer.parseInt(input) - 1; // Convert to zero-based index
-            if (index < 0) {
-                throw new NumberFormatException();
+    private static List<Integer> parseIndices(String input) throws NatsbotException {
+        String[] parts = input.split("\\s+");
+        List<Integer> indices = new ArrayList<>();
+        for (String part : parts) {
+            try {
+                int index = Integer.parseInt(part) - 1;
+                if (index < 0) {
+                    throw new NumberFormatException();
+                }
+                indices.add(index);
+            } catch (NumberFormatException e) {
+                throw new NatsbotException("Invalid task number: " + part);
             }
-            return index;
-        } catch (NumberFormatException e) {
-            throw new NatsbotException("Invalid task number.");
         }
+        return indices;
     }
 
     /**

@@ -44,21 +44,21 @@ public class Ui {
     /**
      * Displays a message when a task is deleted.
      *
-     * @param task the task that was deleted
+     * @param response the response message detailing the deleted tasks
      * @param size the current number of tasks in the list
      */
-    public void showTaskDeleted(Task task, int size) {
-        System.out.println("Noted. I've removed this task:\n" + task);
+    public void showTaskDeleted(String response, int size) {
+        System.out.println(response);
         System.out.println("Now you have " + size + " tasks in the list.");
     }
 
     /**
      * Displays a message when a task is marked as done.
      *
-     * @param task the task that was marked as done
+     * @param response the response message detailing the tasks marked as done
      */
-    public void showTaskMarked(Task task) {
-        System.out.println("Cool! I've marked this task as done:\n" + task);
+    public void showTaskMarked(String response) {
+        System.out.println(response);
     }
 
     /**
