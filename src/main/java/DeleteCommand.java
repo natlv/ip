@@ -1,17 +1,21 @@
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Represents a command to delete a task from the task list.
  */
 public class DeleteCommand implements Command, ResponseCommand {
-    private int taskIndex;
+    private final List<Integer> taskIndices;
     private String response;
 
     /**
      * Constructs a DeleteCommand with the specified index of the task to be deleted.
      *
-     * @param taskIndex the index of the task to delete
+     * @param taskIndices the list of indices of the tasks to be deleted
      */
-    public DeleteCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+    public DeleteCommand(List<Integer> taskIndices) {
+        this.taskIndices = taskIndices;
+        Collections.sort(this.taskIndices, Collections.reverseOrder());
     }
 
     /**
@@ -25,16 +29,20 @@ public class DeleteCommand implements Command, ResponseCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws NatsbotException {
-        if (taskIndex < 0 || taskIndex >= tasks.getTasks().size()) {
-            throw new NatsbotException("Invalid task number.");
+        StringBuilder responseBuilder = new StringBuilder("Noted. I've removed the following:\n");
+        for (int index : taskIndices) {
+            if (index < 0 || index >= tasks.getTasks().size()) {
+                throw new NatsbotException("Invalid task number.");
+            }
+            Task task = tasks.getTasks().get(index);
+            assert task != null : "Task should not be null";
+            responseBuilder.append(task).append("\n");
+            int origTaskListSize = tasks.getTasks().size();
+            tasks.deleteTask(index);
+            assert tasks.getTasks().size() == origTaskListSize - 1 : "Task should have been deleted";
         }
-        Task task = tasks.getTasks().get(taskIndex);
-        assert task != null : "Task should not be null";
-        int origTaskListSize = tasks.getTasks().size();
-        tasks.deleteTask(taskIndex);
-        assert tasks.getTasks().size() == origTaskListSize - 1 : "Task should have been deleted";
-        response = "Deleted task:\n" + task;
-        ui.showTaskDeleted(task, tasks.getTasks().size());
+        response = responseBuilder.toString();
+        ui.showTaskDeleted(response, tasks.getTasks().size());
         storage.save(tasks.getTasks());
     }
 

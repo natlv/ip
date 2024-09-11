@@ -6,8 +6,8 @@ or type 'bye' to exit the program.
 
 You haven't added any tasks to the list yet!
 Hmm... your task list is empty. There's nothing to see here.
-Error: I'm sorry, I don't understand that command. Use 'list' to see tasks,'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,'mark' to mark a task as done, or 'delete' to delete a task.
-I'm sorry, I don't understand that command. Use 'list' to see tasks,'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,'mark' to mark a task as done, or 'delete' to delete a task.
+Error: I'm sorry, I don't understand that command. Use 'list' to see tasks,'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,'do-after' to add a do-after task, 'mark' to mark tasks as done, or 'delete' to delete tasks.
+I'm sorry, I don't understand that command. Use 'list' to see tasks,'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,'do-after' to add a do-after task, 'mark' to mark tasks as done, or 'delete' to delete tasks.
 Error: The 'event' command must include a description and a time range.Usage: event DESCRIPTION /from START /to END
 Error: The description of a todo cannot be empty. Usage: todo DESCRIPTION
 Error: The deadline command must include a description and a date,separated by '/by'. Usage: deadline DESCRIPTION /by DATE (yyyy-MM-dd) or (yyyy-MM-dd HHmm)
@@ -35,36 +35,62 @@ Error: Invalid date format. Please either input a real date in the following for
 Error: Invalid date format. Please either input a real date in the following format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.
 Error: Invalid date format. Please either input a real date in the following format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.
 Got it. I've added this task:
-  [D][ ] learn cs2103 (by: Sep 30 2024 16:20)
+  [D][ ] learn cs2103 (by: Sept 30 2024 16:20)
 Now you have 6 tasks in the list.
-Task added:   [D][ ] learn cs2103 (by: Sep 30 2024 16:20)
-Cool! I've marked this task as done:
+Task added:   [D][ ] learn cs2103 (by: Sept 30 2024 16:20)
+Got it. I've added this task:
+  [A][ ] return book (after: exam)
+Now you have 7 tasks in the list.
+Task added:   [A][ ] return book (after: exam)
+Got it. I've added this task:
+  [A][ ] take a nap (after: studying)
+Now you have 8 tasks in the list.
+Task added:   [A][ ] take a nap (after: studying)
+Cool! I've marked the following as done:
   [D][X] homework (by: Aug 30 2024)
-Nice! I've marked this task as done:
+
+Cool! I've marked the following as done:
   [D][X] homework (by: Aug 30 2024)
-Cool! I've marked this task as done:
-  [D][X] learn cs2103 (by: Sep 30 2024 16:20)
-Nice! I've marked this task as done:
-  [D][X] learn cs2103 (by: Sep 30 2024 16:20)
-Noted. I've removed this task:
+
+Cool! I've marked the following as done:
+  [D][X] learn cs2103 (by: Sept 30 2024 16:20)
+
+Cool! I've marked the following as done:
+  [D][X] learn cs2103 (by: Sept 30 2024 16:20)
+
+Noted. I've removed the following:
+  [T][ ] read book
   [T][ ] buy book
+  [T][ ] sleep more
+
 Now you have 5 tasks in the list.
-Deleted task:
+Noted. I've removed the following:
+  [T][ ] read book
   [T][ ] buy book
+  [T][ ] sleep more
+
+Error: Invalid task number: 0
+Cool! I've marked the following as done:
+  [D][X] homework (by: Aug 30 2024)
+  [E][X] teach tuition (from: 4am to: 7am)
+
+Cool! I've marked the following as done:
+  [D][X] homework (by: Aug 30 2024)
+  [E][X] teach tuition (from: 4am to: 7am)
+
 Error: Invalid task number.
 Error: Invalid task number.
-Error: Invalid task number.
-1.   [T][ ] sleep more
-2.   [D][X] homework (by: Aug 30 2024)
-3.   [T][ ] read book
-4.   [E][ ] teach tuition (from: 4am to: 7am)
-5.   [D][X] learn cs2103 (by: Sep 30 2024 16:20)
+1.   [D][X] homework (by: Aug 30 2024)
+2.   [E][X] teach tuition (from: 4am to: 7am)
+3.   [D][X] learn cs2103 (by: Sept 30 2024 16:20)
+4.   [A][ ] return book (after: exam)
+5.   [A][ ] take a nap (after: studying)
 Here are the tasks in your list:
-1.   [T][ ] sleep more
-2.   [D][X] homework (by: Aug 30 2024)
-3.   [T][ ] read book
-4.   [E][ ] teach tuition (from: 4am to: 7am)
-5.   [D][X] learn cs2103 (by: Sep 30 2024 16:20)
+1.   [D][X] homework (by: Aug 30 2024)
+2.   [E][X] teach tuition (from: 4am to: 7am)
+3.   [D][X] learn cs2103 (by: Sept 30 2024 16:20)
+4.   [A][ ] return book (after: exam)
+5.   [A][ ] take a nap (after: studying)
 Goodbye. Hope to see you again soon!
 Goodbye. Hope to see you again soon!
 Goodbye. Hope to see you again soon!

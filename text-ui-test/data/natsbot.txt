@@ -1,5 +1,5 @@
-  [T][ ] sleep more
   [D][X] homework (by: Aug 30 2024)
-  [T][ ] read book
-  [E][ ] teach tuition (from: 4am to: 7am)
+  [E][X] teach tuition (from: 4am to: 7am)
   [D][X] learn cs2103 (by: Sept 30 2024 16:20)
+  [A][ ] return book (after: exam)
+  [A][ ] take a nap (after: studying)
