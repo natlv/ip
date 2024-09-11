@@ -38,6 +38,9 @@ public class CommandParser {
         case "event":
             return parseEventCommand(words);
 
+        case "do-after":
+            return parseDoAfterCommand(words);
+
         case "find":
             if (words.length < 2 || words[1].trim().isEmpty()) {
                 throw new NatsbotException("The search keyword cannot be empty.");
@@ -50,7 +53,7 @@ public class CommandParser {
         default:
             return new UnknownCommand("I'm sorry, I don't understand that command. Use 'list' to see tasks,"
                     + "'bye' to exit, 'todo' to add a todo, 'deadline' to add a deadline, 'event' to add an event,"
-                    + "'mark' to mark a task as done, or 'delete' to delete a task.");
+                    + "'do-after' to add a do-after task, 'mark' to mark a task done, or 'delete' to delete a task.");
         }
     }
 
@@ -186,5 +189,29 @@ public class CommandParser {
                         + "format: 'yyyy-MM-dd', or a real date and time in the following format: 'yyyy-MM-dd HHmm'.");
             }
         }
+    }
+
+    /**
+     * Parses the 'do after' command to create an AddCommand that adds a new DoAfterTask.
+     *
+     * @param words The split input string containing the command, task description, and after event/time.
+     * @return An AddCommand object to add a new DoAfterTask.
+     * @throws NatsbotException if the command format is incorrect or the description is empty.
+     */
+    private static Command parseDoAfterCommand(String[] words) throws NatsbotException {
+        if (words.length < 2 || !words[1].contains("/after")) {
+            throw new NatsbotException("The 'do after' command must include a description and an event/time,"
+                    + " separated by '/after'. Usage: DESCRIPTION /after EVENT");
+        }
+        String[] parts = words[1].split(" /after ", 2);
+        String description = parts[0].trim();
+        String after = parts[1].trim();
+
+        if (description.isEmpty() || after.isEmpty()) {
+            throw new NatsbotException("The description and after time/event cannot be empty. Usage: do-after DESCRIPTION /after EVENT");
+        }
+
+        Task doAfterTask = new DoAfter(description, after);
+        return new AddCommand(doAfterTask);
     }
 }
