@@ -32,6 +32,7 @@ public class Main extends Application {
             stage.setMinWidth(417);
             fxmlLoader.<MainWindow>getController().setNatsbot(natsbot);
             stage.show();
+            natsbot.showWelcomeMessage();
         } catch (IOException e) {
             e.printStackTrace();
         }

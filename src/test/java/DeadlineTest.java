@@ -1,7 +1,16 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+/**
+ * Test class for the {@link Deadline} class.
+ * Verifies the correct creation and string representation of a Deadline task.
+ */
 public class DeadlineTest {
+
+    /**
+     * Tests the creation of a valid Deadline task and verifies its string representation.
+     */
     @Test
     public void testValidDeadlineCreation() {
         // Test creation of a new Deadline task

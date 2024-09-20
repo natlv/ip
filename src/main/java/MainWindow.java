@@ -31,6 +31,9 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setNatsbot(Natsbot nb) {
         natsbot = nb;
+        dialogContainer.getChildren().add(
+                DialogBox.getNatsbotDialog(natsbot.getWelcomeMessage(), natsbotImage, "Welcome")
+        );
     }
 
     /**
