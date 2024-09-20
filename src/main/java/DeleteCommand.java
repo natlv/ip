@@ -32,7 +32,7 @@ public class DeleteCommand implements Command, ResponseCommand {
         StringBuilder responseBuilder = new StringBuilder("Noted, my dude. I've removed the following:\n");
         for (int index : taskIndices) {
             if (index < 0 || index >= tasks.getTasks().size()) {
-                throw new NatsbotException("Invalid task number.");
+                throw new NatsbotException("Invalid task number. Please enter a valid task number.");
             }
             Task task = tasks.getTasks().get(index);
             assert task != null : "Task should not be null";

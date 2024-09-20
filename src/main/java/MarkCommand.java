@@ -30,7 +30,7 @@ public class MarkCommand implements Command, ResponseCommand {
         StringBuilder responseBuilder = new StringBuilder("Cool! I've marked the following as done:\n");
         for (int index : taskIndices) {
             if (index < 0 || index >= tasks.getTasks().size()) {
-                throw new NatsbotException("Invalid task number.");
+                throw new NatsbotException("Invalid task number. Please enter a valid task number.");
             }
             assert tasks != null : "TaskList should not be null";
             Task task = tasks.getTasks().get(index);
