@@ -9,7 +9,9 @@ public class Ui {
      * Displays a welcome message to the user.
      */
     public void showWelcomeMessage() {
-        // Print welcome message
+        //@@author natlv-reused
+        //Reused from https://github.com/Yukun99
+        //with some modifications
         System.out.println("Hello! I'm Natsbot. What can I do for you?\n" + "Here's the possible ways you can text me:\n"
                 + " [] denotes required non-empty fields\n" + " > 'todo [task description]' - adds a to-do task\n"
                 + " > 'deadline [task description] /by [due date]' - adds a deadline task\n"

@@ -77,12 +77,13 @@ public class Natsbot {
 
     /**
      * Returns the welcome message as a string.
-     * Credit to user @Yukun99 for the idea of placing allowed commands in the welcome message,
-     * so the instructions are clear for the user to follow.
      *
      * @return the welcome message
      */
     public String getWelcomeMessage() {
+        //@@author natlv-reused
+        //Reused from https://github.com/Yukun99
+        //with some modifications
         return "Hello! I'm Natsbot. What can I do for you?\n" + "Here's the possible ways you can text me:\n"
                 + " [] denotes required non-empty fields\n" + " > 'todo [task description]' - adds a to-do task\n"
                 + " > 'deadline [task description] /by [due date]' - adds a deadline task\n"
