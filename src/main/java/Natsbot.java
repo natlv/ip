@@ -77,7 +77,8 @@ public class Natsbot {
 
     /**
      * Returns the welcome message as a string.
-     * Credit to user @Yukun99 for the idea of placing allowed commands in the welcome message.
+     * Credit to user @Yukun99 for the idea of placing allowed commands in the welcome message,
+     * so the instructions are clear for the user to follow.
      *
      * @return the welcome message
      */
@@ -87,7 +88,7 @@ public class Natsbot {
                 + " > 'deadline [task description] /by [due date]' - adds a deadline task\n"
                 + "  - The due date should be in the format 'yyyy-MM-dd' or 'yyyy-MM-dd HHmm'\n"
                 + " > 'event [task description] /from [event start] /to [event end]' - adds an event task\n"
-                + " > 'doafter [task description] /after [prerequisite]' - adds a task to be done after something else"
+                + " > 'do-after [description] /after [prerequisite]' - adds a task to be done after something else\n"
                 + " > 'list' - lists all existing tasks\n"
                 + " > 'mark [task number]' - marks a task as done\n"
                 + " > 'delete [task number]' - deletes a task\n"

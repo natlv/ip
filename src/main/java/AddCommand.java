@@ -31,6 +31,6 @@ public class AddCommand implements Command, ResponseCommand {
 
     @Override
     public String getString() {
-        return "Task added: " + task.toString();
+        return "Bet. Task added: " + task.toString();
     }
 }

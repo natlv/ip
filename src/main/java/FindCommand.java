@@ -30,10 +30,10 @@ public class FindCommand implements Command, ResponseCommand {
         StringBuilder responseBuilder = new StringBuilder();
 
         if (foundTasks.isEmpty()) {
-            responseBuilder.append("No tasks found matching the keyword: ").append(keyword);
+            responseBuilder.append("Oops! No tasks found matching the keyword: ").append(keyword);
         } else {
             assert foundTasks.size() > 0 : "Found tasks list should not be empty.";
-            responseBuilder.append("Here are the matching tasks in your list:\n");
+            responseBuilder.append("Okay! Here are the matching tasks in your list:\n");
             for (int i = 0; i < foundTasks.size(); i++) {
                 responseBuilder.append((i + 1)).append(". ").append(foundTasks.get(i)).append("\n");
             }
