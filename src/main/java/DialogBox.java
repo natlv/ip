@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 /**
  * A custom control representing a dialog box consisting of a Label for text and an ImageView for picture.
@@ -42,6 +43,12 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        dialog.setMaxWidth(Double.MAX_VALUE);
+        dialog.setWrapText(true);
+        HBox.setHgrow(dialog, Priority.ALWAYS);
+
+        this.setAlignment(Pos.TOP_RIGHT);
     }
 
     /**
