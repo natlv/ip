@@ -29,7 +29,7 @@ public class DeleteCommand implements Command, ResponseCommand {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws NatsbotException {
-        StringBuilder responseBuilder = new StringBuilder("Noted. I've removed the following:\n");
+        StringBuilder responseBuilder = new StringBuilder("Noted, my dude. I've removed the following:\n");
         for (int index : taskIndices) {
             if (index < 0 || index >= tasks.getTasks().size()) {
                 throw new NatsbotException("Invalid task number.");

@@ -210,7 +210,7 @@ public class CommandParser {
     private static Command parseDoAfterCommand(String[] words) throws NatsbotException {
         if (words.length < 2 || !words[1].contains("/after")) {
             throw new NatsbotException("The 'do after' command must include a description and an event/time,"
-                    + " separated by '/after'. Usage: DESCRIPTION /after EVENT");
+                    + " separated by '/after'. Usage: do-after DESCRIPTION /after EVENT");
         }
         String[] parts = words[1].split(" /after ", 2);
         String description = parts[0].trim();
