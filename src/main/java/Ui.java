@@ -10,8 +10,17 @@ public class Ui {
      */
     public void showWelcomeMessage() {
         // Print welcome message
-        System.out.println("Hello! I'm Natsbot\n" + "What can I do for you?\n");
-        System.out.println("Type a prompt below, type 'list' to see tasks,\nor type 'bye' to exit the program.\n");
+        System.out.println("Hello! I'm Natsbot. What can I do for you?\n" + "Here's the possible ways you can text me:\n"
+                + " [] denotes required non-empty fields\n" + " > 'todo [task description]' - adds a to-do task\n"
+                + " > 'deadline [task description] /by [due date]' - adds a deadline task\n"
+                + "  - The due date should be in the format 'yyyy-MM-dd' or 'yyyy-MM-dd HHmm'\n"
+                + " > 'event [task description] /from [event start] /to [event end]' - adds an event task\n"
+                + " > 'doafter [task description] /after [prerequisite]' - adds a task to be done after something else"
+                + " > 'list' - lists all existing tasks\n"
+                + " > 'mark [task number]' - marks a task as done\n"
+                + " > 'delete [task number]' - deletes a task\n"
+                + " > 'find [keyword]' - finds tasks containing the keyword\n"
+                + " > 'bye' - exits the program\n");
     }
 
     /**
