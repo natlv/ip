@@ -1,30 +1,81 @@
 # Natsbot User Guide
 
-// Update the title above to match the actual product name
+![Screenshot of Natsbot](Ui.png)
 
-// Product screenshot goes here
-
-// Product intro goes here
+Natsbot is an all-in-one chatbot and task manager that:
+* helps you keep track of your various tasks and deadlines
+* runs on the command line interface (CLI) 
+* is optimized for use via a keyboard
 
 ## Adding deadlines
 
-// Describe the action and its outcome.
+Add a new deadline to your task list.
 
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
+Example: `deadline return book /by 2024-10-19`
 
 ```
-expected output
+Bet. Task added:  [D][] return book (by: Oct 19 2024)
 ```
 
-## Feature ABC
+Example: `deadline complete assignment /by 2024-10-19 1300`
 
-// Feature details
+```
+Bet. Task added:  [D][] complete assignment (by: Oct 19 2024 13:00)
+```
 
+## Marking tasks as done
 
-## Feature XYZ
+Mark a task as completed with an 'X'.
 
-// Feature details
+Example: 
+
+`todo essay` 
+```
+Bet. Task added:  [T][] essay
+```
+`done 1`
+```
+Cool! I've marked the following as done:
+  [T][X] essay
+```
+
+## Viewing task list
+
+View the full list of tasks you currently have.
+
+Example:
+
+`event party /from 9pm /to /1am`
+```
+Bet. Task added:  [E][] party (from: 9pm to: 1am)
+```
+`do-after sleep /after party`
+```
+Bet. Task added:  [A][] sleep (after: party)
+```
+`list`
+```
+Okay! Here are the tasks in your list:
+1. [E][] party (from: 9pm to: 1am)
+2. [A][] sleep (after: party)
+```
+
+## Finding tasks
+
+Find a specific task by keyword.
+
+Example:
+
+`todo essay on football club`
+```
+Bet. Task added:  [T][] essay on football club
+```
+`find football`
+```
+Okay! Here are the matching tasks in your list:
+1. [T][] essay on football club
+```
+
+Thank you for using Natsbot!
+
+Feel free to email me at [nathanlooenping@gmail.com](mailto:nathanlooenping@gmail.com) if you have any queries or suggestions :grin:
