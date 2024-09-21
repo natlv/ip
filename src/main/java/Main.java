@@ -30,6 +30,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setMinHeight(220);
             stage.setMinWidth(417);
+            stage.setTitle("Natsbot");
             fxmlLoader.<MainWindow>getController().setNatsbot(natsbot);
             stage.show();
             natsbot.showWelcomeMessage();
@@ -38,4 +39,3 @@ public class Main extends Application {
         }
     }
 }
-
