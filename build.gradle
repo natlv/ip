@@ -43,11 +43,13 @@ test {
 }
 
 application {
-    mainClassName = 'Main'
+    mainClass.set('Main')
 }
 
 shadowJar {
     archiveFileName = 'natsbot.jar'
+    archiveBaseName.set('natsbot')
+    archiveClassifier = null
 }
 
 run{
