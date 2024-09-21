@@ -217,7 +217,8 @@ public class CommandParser {
         String after = parts[1].trim();
 
         if (description.isEmpty() || after.isEmpty()) {
-            throw new NatsbotException("The description and after time/event cannot be empty. Usage: do-after DESCRIPTION /after EVENT");
+            throw new NatsbotException("The description and after time/event cannot be empty. Usage: " +
+                    "do-after DESCRIPTION /after EVENT");
         }
 
         Task doAfterTask = new DoAfter(description, after);

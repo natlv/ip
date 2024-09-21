@@ -1,4 +1,6 @@
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.util.Duration;
 
 /**
  * Represents a command to terminate the Natsbot application.
@@ -18,7 +20,11 @@ public class ExitCommand implements Command, ResponseCommand {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         response = "Goodbye. Hope to see you again soon!";
         ui.showGoodbyeMessage();
-        Platform.exit();
+
+        // Delay the exit to allow the goodbye message to be displayed
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
     }
 
     /**
