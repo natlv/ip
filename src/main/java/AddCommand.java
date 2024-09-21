@@ -29,11 +29,6 @@ public class AddCommand implements Command, ResponseCommand {
         storage.save(tasks.getTasks());
     }
 
-    /**
-     * Returns the response message generated after adding the task.
-     *
-     * @return the response message as a string
-     */
     @Override
     public String getString() {
         return "Bet. Task added: " + task.toString();
