@@ -48,7 +48,7 @@ application {
 
 shadowJar {
     archiveFileName = 'natsbot.jar'
-    archiveBaseName.set('natsbot')
+    archiveBaseName = 'natsbot'
     archiveClassifier = null
 }
 
