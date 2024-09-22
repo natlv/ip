@@ -8,24 +8,30 @@ repositories {
     mavenCentral()
 }
 
+def getOsClassifier() {
+    def osName = System.getProperty("os.name").toLowerCase()
+    if (osName.contains("win")) {
+        return "win"
+    } else if (osName.contains("mac")) {
+        return "mac"
+    } else if (osName.contains("nux") || osName.contains("nix")) {
+        return "linux"
+    } else {
+        throw new GradleException("Unsupported OS: " + osName)
+    }
+}
+
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
 
     String javaFxVersion = '17.0.7'
+    String osClassifier = getOsClassifier()
 
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
-    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
-    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
-    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    implementation "org.openjfx:javafx-base:$javaFxVersion:$osClassifier"
+    implementation "org.openjfx:javafx-controls:$javaFxVersion:$osClassifier"
+    implementation "org.openjfx:javafx-fxml:$javaFxVersion:$osClassifier"
+    implementation "org.openjfx:javafx-graphics:$javaFxVersion:$osClassifier"
 }
 
 test {
@@ -43,7 +49,7 @@ test {
 }
 
 application {
-    mainClass.set('Main')
+    mainClass.set('Launcher')
 }
 
 shadowJar {
