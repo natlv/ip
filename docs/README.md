@@ -9,7 +9,7 @@ Natsbot is an all-in-one chatbot and task manager that:
 
 ## Adding deadlines
 
-Add a new deadline to your task list.
+Add a new deadline to your list of tasks.
 
 Example: `deadline return book /by 2024-10-19`
 
@@ -25,7 +25,7 @@ Bet. Task added:  [D][] complete assignment (by: Oct 19 2024 13:00)
 
 ## Marking tasks as done
 
-Mark a task as completed with an 'X'.
+Mark a task as complete with an 'X'.
 
 Example: 
 
