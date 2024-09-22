@@ -49,15 +49,15 @@ Example:
 ```
 Bet. Task added:  [E][] party (from: 9pm to: 1am)
 ```
-`do-after sleep /after party`
+`do-after sleep /after partying`
 ```
-Bet. Task added:  [A][] sleep (after: party)
+Bet. Task added:  [A][] sleep (after: partying)
 ```
 `list`
 ```
 Okay! Here are the tasks in your list:
 1. [E][] party (from: 9pm to: 1am)
-2. [A][] sleep (after: party)
+2. [A][] sleep (after: partying)
 ```
 
 ## Finding tasks
