@@ -78,4 +78,4 @@ Okay! Here are the matching tasks in your list:
 
 Thank you for using Natsbot!
 
-Feel free to email me at [nathanlooenping@gmail.com](mailto:nathanlooenping@gmail.com) if you have any queries or suggestions :grin:
+Feel free to email me at [nathanlooenping@gmail.com](mailto:nathanlooenping@gmail.com) if you have any queries or suggestions.
