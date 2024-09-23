@@ -1,5 +1,3 @@
-import javafx.application.Application;
-
 /**
  * A launcher class to work around classpath issues.
  */
