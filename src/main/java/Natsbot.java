@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Class that runs the Natsbot text application.
@@ -17,8 +19,43 @@ public class Natsbot {
      */
     public Natsbot(String filePath) {
         ui = new Ui();
+
+        ensureDirectoryAndFileExist(filePath);
+
         storage = new Storage(filePath);
         tasks = new TaskList();
+    }
+
+    /**
+     * Constructs a new Natsbot instance with the specified file path for storage.
+     * Ensures that the necessary directory and file are created if they do not exist.
+     *
+     * @param filePath the path to the file where tasks are stored
+     */
+    private void ensureDirectoryAndFileExist(String filePath) {
+        File file = new File(filePath);
+        File directory = file.getParentFile();
+
+        if (!directory.exists()) {
+            if (directory.mkdirs()) {
+                System.out.println("Directory created: " + directory.getAbsolutePath());
+            } else {
+                System.out.println("Failed to create directory: " + directory.getAbsolutePath());
+            }
+        }
+
+        if (!file.exists()) {
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("File created: " + file.getAbsolutePath());
+                } else {
+                    System.out.println("Failed to create file: " + file.getAbsolutePath());
+                }
+            } catch (IOException e) {
+                System.err.println("An error occurred while creating the file: " + file.getAbsolutePath());
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -30,10 +67,10 @@ public class Natsbot {
 
         while (true) {
             String input = reader.nextLine();
-            String response = getResponse(input); // Use getResponse to handle input and generate response
+            String response = getResponse(input);
             System.out.println(response);
 
-            if ("ExitCommand".equals(commandType)) { // Break the loop if the command type is ExitCommand
+            if ("ExitCommand".equals(commandType)) {
                 break;
             }
         }
@@ -52,8 +89,8 @@ public class Natsbot {
         try {
             Command command = CommandParser.parse(input);
             command.execute(tasks, ui, storage);
-            commandType = command.getClass().getSimpleName(); // Track the type of the executed command
-            return command instanceof ResponseCommand ? ((ResponseCommand) command).getString() : ""; // Get the response string if available
+            commandType = command.getClass().getSimpleName();
+            return command instanceof ResponseCommand ? ((ResponseCommand) command).getString() : "";
         } catch (NatsbotException e) {
             return "Error: " + e.getMessage();
         }
